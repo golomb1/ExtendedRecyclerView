@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ExtendedRecyclerView</string>
+    <string name="footer_total_elements_is">Footer: Total elements is</string>
+    <string name="example">example</string>
+    <string name="no_items">No items</string>
+    <string name="header_list">Header List</string>
+    <string name="icon">Icon</string>
+    <string name="drag_handler">Drag handler</string>
+    <string name="enter_string">Enter String</string>
+    <string name="add">Add</string>
 </resources>
