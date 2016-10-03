@@ -52,4 +52,6 @@ public interface DataExtractor<T,VH extends ExtendedViewHolder<T>>{
     boolean hasFooter();
 
     boolean hasHeader();
+
+    String getSectionName(int position);
 }

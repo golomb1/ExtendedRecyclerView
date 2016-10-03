@@ -1,16 +1,19 @@
 package com.libs.golomb.extendedrecyclerview;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
+
 /**
  * Created by golomb on 13/07/2016.
  * This class represent an adapter
  */
-public class ExtendedRecycleAdapter<T> extends RecyclerView.Adapter<ExtendedViewHolder<T>> implements ItemTouchHelperAdapter {
+public class ExtendedRecycleAdapter<T> extends RecyclerView.Adapter<ExtendedViewHolder<T>> implements ItemTouchHelperAdapter,FastScrollRecyclerView.SectionedAdapter  {
 
     private DataExtractor<T,ExtendedViewHolder<T>> mDataExtractor;
     private IViewHolderGenerator<ExtendedViewHolder<T>> mViewHolderGenerator;
@@ -148,6 +151,12 @@ public class ExtendedRecycleAdapter<T> extends RecyclerView.Adapter<ExtendedView
         if(mTouchHelper != null){
             this.mTouchHelper.startDrag(viewHolder);
         }
+    }
+
+    @NonNull
+    @Override
+    public String getSectionName(int position) {
+        return mDataExtractor.getSectionName(position);
     }
 
 

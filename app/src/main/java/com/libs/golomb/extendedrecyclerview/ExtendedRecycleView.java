@@ -4,10 +4,12 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.List;
  * Created by golomb on 13/07/2016.
  * This class should represent a recycle view with customs option build in.
  */
-public class ExtendedRecycleView extends RecyclerView {
+public class ExtendedRecycleView extends FastScrollRecyclerView {
 
     private Context mContext;
     private ItemTouchHelper mTouchHelper;

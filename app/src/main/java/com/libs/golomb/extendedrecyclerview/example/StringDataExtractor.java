@@ -24,4 +24,9 @@ public class StringDataExtractor extends ListDataExtractor<String,ExtendedViewHo
             ((List<String>) list).add(text);
         }
     }
+
+    @Override
+    protected String getElementSectionName(String item) {
+        return String.valueOf(item.charAt(0));
+    }
 }

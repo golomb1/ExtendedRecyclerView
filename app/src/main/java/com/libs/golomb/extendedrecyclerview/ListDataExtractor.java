@@ -110,4 +110,25 @@ public abstract class ListDataExtractor<T, VH extends ExtendedViewHolder<T>> imp
     public boolean hasHeader() {
         return header;
     }
+
+    @Override
+    public String getSectionName(int position) {
+        if(size() == 0){
+            return "";
+        }
+        else if(hasHeader()){
+            if(position == 0){
+                return "";
+            }
+            else if(hasFooter() && position == size() + 1){
+                return "";
+            }
+        }
+        else if(hasFooter() && position == size()){
+            return "";
+        }
+        return getElementSectionName(get(hasHeader() ? position - 1 : position));
+    }
+
+    protected abstract String getElementSectionName(T item);
 }
