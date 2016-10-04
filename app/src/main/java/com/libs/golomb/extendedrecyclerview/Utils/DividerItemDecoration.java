@@ -1,4 +1,4 @@
-package com.libs.golomb.extendedrecyclerview;
+package com.libs.golomb.extendedrecyclerview.Utils;
 
 
 import android.content.Context;

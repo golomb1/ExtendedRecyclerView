@@ -2,17 +2,19 @@ package com.libs.golomb.extendedrecyclerview.example.viewholder;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.libs.golomb.extendedrecyclerview.DataExtractor.DataExtractor;
 import com.libs.golomb.extendedrecyclerview.ExtendedRecycleAdapter;
-import com.libs.golomb.extendedrecyclerview.ExtendedViewHolder;
+import com.libs.golomb.extendedrecyclerview.example.SampleData;
+import com.libs.golomb.extendedrecyclerview.viewholder.ExtendedViewHolder;
 import com.libs.golomb.extendedrecyclerview.R;
 
 /**
  * Created by tomer on 02/10/2016.
+ * Example
  */
-public class StringHeaderViewHolder  extends ExtendedViewHolder<String> {
+public class StringHeaderViewHolder  extends ExtendedViewHolder<SampleData> {
 
     private final TextView mText;
 
@@ -37,7 +39,7 @@ public class StringHeaderViewHolder  extends ExtendedViewHolder<String> {
     }
 
     @Override
-    public void bind(String s, int i, int type) {
-        Log.d("T","T");
+    public void bind(DataExtractor<SampleData, ExtendedViewHolder<SampleData>> mDataExtractor, int position, int itemType) {
+        mText.setText("Header of " + mDataExtractor.size() + " elements!");
     }
 }

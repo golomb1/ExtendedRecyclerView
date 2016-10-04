@@ -1,4 +1,4 @@
-package com.libs.golomb.extendedrecyclerview.example;
+package com.libs.golomb.extendedrecyclerview.example_app;
 
 import android.app.Dialog;
 import android.support.design.widget.FloatingActionButton;
@@ -10,19 +10,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.libs.golomb.extendedrecyclerview.ExtendedRecycleAdapter;
 import com.libs.golomb.extendedrecyclerview.ExtendedRecycleView;
 import com.libs.golomb.extendedrecyclerview.R;
+import com.libs.golomb.extendedrecyclerview.example.SampleData;
+import com.libs.golomb.extendedrecyclerview.example.StringDataExtractor;
+import com.libs.golomb.extendedrecyclerview.example.StringViewHolderGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ExtendedRecycleAdapter.OnClickListener<String> {
+public class MainActivity extends AppCompatActivity implements ExtendedRecycleAdapter.OnClickListener<SampleData> {
 
 
     private StringDataExtractor dataExtractor;
-    private ExtendedRecycleAdapter<String> adapter;
+    private ExtendedRecycleAdapter<SampleData> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements ExtendedRecycleAd
         StringViewHolderGenerator generator = new StringViewHolderGenerator(this);
         adapter = new ExtendedRecycleAdapter<>(dataExtractor, generator, this);
         recyclerView.initializeDefault(this, LinearLayoutManager.VERTICAL, adapter);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,17 +69,19 @@ public class MainActivity extends AppCompatActivity implements ExtendedRecycleAd
         dialog.show();
     }
 
-    public List<String> getStringList() {
-        List<String> list = new ArrayList<>();
+    public List<SampleData> getStringList() {
+        List<SampleData> list = new ArrayList<>();
         for(char i = 'a'; i <= 'z'; i ++){
-            list.add( i + "Item");
+            list.add(new SampleData(i + "Item"));
+            list.add(new SampleData(i + "Item"));
+            list.add(new SampleData(i + "Item"));
         }
         return list;
     }
 
     @Override
-    public void onClick(View view, String item) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+    public void onClick(View view, SampleData item) {
+        Snackbar.make(view, item.toString(), Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
 }

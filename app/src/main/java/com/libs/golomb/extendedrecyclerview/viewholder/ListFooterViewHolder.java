@@ -1,7 +1,11 @@
-package com.libs.golomb.extendedrecyclerview;
+package com.libs.golomb.extendedrecyclerview.viewholder;
 
 import android.view.View;
 import android.widget.TextView;
+
+import com.libs.golomb.extendedrecyclerview.DataExtractor.DataExtractor;
+import com.libs.golomb.extendedrecyclerview.ExtendedRecycleAdapter;
+import com.libs.golomb.extendedrecyclerview.R;
 
 /**
  * Created by golomb on 22/07/2016.
@@ -33,8 +37,8 @@ public class ListFooterViewHolder<T> extends ExtendedViewHolder<T>{
     }
 
     @Override
-    public void bind(T t, int i, int type) {
-        mText.setText(String.valueOf(t));
+    public void bind(DataExtractor<T, ExtendedViewHolder<T>> mDataExtractor, int position, int itemType) {
+        setText(mDataExtractor.size());
     }
 
     public void setText(String text){

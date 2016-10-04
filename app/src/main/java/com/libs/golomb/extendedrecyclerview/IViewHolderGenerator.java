@@ -2,6 +2,8 @@ package com.libs.golomb.extendedrecyclerview;
 
 import android.view.ViewGroup;
 
+import com.libs.golomb.extendedrecyclerview.viewholder.ExtendedViewHolder;
+
 /**
  * Created by golomb on 13/07/2016.
  * This class represent the logic of creating a view holder

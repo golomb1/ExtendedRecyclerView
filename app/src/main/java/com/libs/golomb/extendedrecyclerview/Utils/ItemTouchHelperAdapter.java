@@ -1,4 +1,4 @@
-package com.libs.golomb.extendedrecyclerview;
+package com.libs.golomb.extendedrecyclerview.Utils;
 
 /**
  * Created by golomb on 13/07/2016.

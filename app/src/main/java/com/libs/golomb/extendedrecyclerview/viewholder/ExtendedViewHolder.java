@@ -1,9 +1,12 @@
-package com.libs.golomb.extendedrecyclerview;
+package com.libs.golomb.extendedrecyclerview.viewholder;
 
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.libs.golomb.extendedrecyclerview.DataExtractor.DataExtractor;
+import com.libs.golomb.extendedrecyclerview.ExtendedRecycleAdapter;
 
 /***
  * This class represt a version of view holder that support all the functionality of the ExtendedRecycleView
@@ -56,5 +59,5 @@ public abstract class ExtendedViewHolder<T> extends RecyclerView.ViewHolder{
 
     public abstract int getType();
 
-    public abstract void bind(T t, int i, int type);
+    public abstract void bind(DataExtractor<T, ExtendedViewHolder<T>> mDataExtractor, int position, int itemType);
 }

@@ -1,6 +1,9 @@
-package com.libs.golomb.extendedrecyclerview;
+package com.libs.golomb.extendedrecyclerview.viewholder;
 
 import android.view.View;
+
+import com.libs.golomb.extendedrecyclerview.DataExtractor.DataExtractor;
+import com.libs.golomb.extendedrecyclerview.ExtendedRecycleAdapter;
 
 /**
  * Created by golomb on 22/07/2016.
@@ -29,7 +32,7 @@ public class EmptyViewHolder<T> extends ExtendedViewHolder<T>{
     }
 
     @Override
-    public void bind(T t, int i, int type) {
+    public void bind(DataExtractor<T, ExtendedViewHolder<T>> mDataExtractor, int position, int itemType) {
         //nothing
     }
 }

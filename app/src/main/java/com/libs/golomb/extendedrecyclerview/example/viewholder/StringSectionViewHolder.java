@@ -1,49 +1,44 @@
 package com.libs.golomb.extendedrecyclerview.example.viewholder;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.libs.golomb.extendedrecyclerview.DataExtractor.DataExtractor;
 import com.libs.golomb.extendedrecyclerview.ExtendedRecycleAdapter;
+import com.libs.golomb.extendedrecyclerview.R;
 import com.libs.golomb.extendedrecyclerview.example.SampleData;
 import com.libs.golomb.extendedrecyclerview.viewholder.ExtendedViewHolder;
-import com.libs.golomb.extendedrecyclerview.R;
-
 
 /**
- * Created by golomb on 13/07/2016.
+ * Created by tomer on 04/10/2016.
  * Example
  */
-public class StringViewHolder extends ExtendedViewHolder<SampleData> {
+public class StringSectionViewHolder extends ExtendedViewHolder<SampleData> {
 
-    private TextView mText;
+    private final TextView mText;
 
-    public StringViewHolder(View itemView,ExtendedRecycleAdapter adapter) {
-        super(itemView,adapter);
-        ImageView mDragHolder = (ImageView) itemView.findViewById(R.id.drag_holder);
-        setDragHolder(mDragHolder);
-        mText = (TextView) itemView.findViewById(R.id.item_title);
+    public StringSectionViewHolder(View itemView, ExtendedRecycleAdapter adapter) {
+        super(itemView, adapter);
+        mText = (TextView) itemView.findViewById(R.id.section_text);
     }
-
 
     @Override
     public boolean isSwappable() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isMovable() {
-        return true;
+        return false;
     }
 
     @Override
     public int getType() {
-        return ITEM;
+        return FOOTER;
     }
 
     @Override
     public void bind(DataExtractor<SampleData, ExtendedViewHolder<SampleData>> mDataExtractor, int position, int itemType) {
-        mText.setText(mDataExtractor.getAt(position).toString());
+        mText.setText(mDataExtractor.getAt(position + 1).getSection());
     }
 }

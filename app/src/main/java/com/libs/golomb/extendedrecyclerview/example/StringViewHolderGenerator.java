@@ -5,9 +5,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.libs.golomb.extendedrecyclerview.DataExtractor;
+import com.libs.golomb.extendedrecyclerview.DataExtractor.DataExtractor;
+import com.libs.golomb.extendedrecyclerview.DataExtractor.SectionListDataExtractor;
 import com.libs.golomb.extendedrecyclerview.ExtendedRecycleAdapter;
-import com.libs.golomb.extendedrecyclerview.ExtendedViewHolder;
+import com.libs.golomb.extendedrecyclerview.example.viewholder.StringSectionViewHolder;
+import com.libs.golomb.extendedrecyclerview.viewholder.ExtendedViewHolder;
 import com.libs.golomb.extendedrecyclerview.IViewHolderGenerator;
 import com.libs.golomb.extendedrecyclerview.R;
 import com.libs.golomb.extendedrecyclerview.example.viewholder.StringEmptyViewHolder;
@@ -20,7 +22,7 @@ import com.libs.golomb.extendedrecyclerview.example.viewholder.StringViewHolder;
  * Created by golomb on 13/07/2016.
  * Example
  */
-public class StringViewHolderGenerator implements IViewHolderGenerator<ExtendedViewHolder<String>> {
+public class StringViewHolderGenerator implements IViewHolderGenerator<ExtendedViewHolder<SampleData>> {
 
     private Activity mActivity;
 
@@ -29,7 +31,7 @@ public class StringViewHolderGenerator implements IViewHolderGenerator<ExtendedV
     }
 
     @Override
-    public ExtendedViewHolder<String> generate(ExtendedRecycleAdapter adapter, ViewGroup parent, int viewType) {
+    public ExtendedViewHolder<SampleData> generate(ExtendedRecycleAdapter adapter, ViewGroup parent, int viewType) {
         if(viewType == DataExtractor.HEADER) {
             View view = mActivity.getLayoutInflater().inflate(R.layout.header, parent, false);
             return new StringHeaderViewHolder(view, adapter);
@@ -46,11 +48,15 @@ public class StringViewHolderGenerator implements IViewHolderGenerator<ExtendedV
             View view = mActivity.getLayoutInflater().inflate(R.layout.no_items, parent, false);
             return new StringEmptyViewHolder(view, adapter);
         }
+        else if(viewType == SectionListDataExtractor.SECTION){
+            View view = mActivity.getLayoutInflater().inflate(R.layout.section, parent, false);
+            return new StringSectionViewHolder(view, adapter);
+        }
         return null;
     }
 
     @Override
-    public void bindEmptyView(ExtendedViewHolder<String> holder) {
+    public void bindEmptyView(ExtendedViewHolder<SampleData> holder) {
         // nothing to do
         Log.d("TGolomb","StringViewHolderGenerator.bindEmptyView");
     }

@@ -7,6 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.libs.golomb.extendedrecyclerview.DataExtractor.DataExtractor;
+import com.libs.golomb.extendedrecyclerview.Utils.ExtendedTouchCallback;
+import com.libs.golomb.extendedrecyclerview.Utils.ItemTouchHelperAdapter;
+import com.libs.golomb.extendedrecyclerview.viewholder.ExtendedViewHolder;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 /**
@@ -61,6 +65,10 @@ public class ExtendedRecycleAdapter<T> extends RecyclerView.Adapter<ExtendedView
         notifyDataSetChanged();
     }
 
+    private boolean hasElements() {
+        return mDataExtractor != null && mDataExtractor.size() != 0;
+    }
+
     @Override
     public long getItemId(int position) {
         if (mDataExtractor != null && position < mDataExtractor.size()) {
@@ -72,26 +80,25 @@ public class ExtendedRecycleAdapter<T> extends RecyclerView.Adapter<ExtendedView
 
     @Override
     public int getItemCount() {
-        if(mDataExtractor != null && mDataExtractor.size() != 0) {
-            int hasHeader = mDataExtractor.hasHeader() ? 1 : 0;
-            int hasFooter = mDataExtractor.hasFooter() ? 1 : 0;
-            return mDataExtractor.size() + hasHeader + hasFooter;
+        if(hasElements()) {
+            int metadataCount = mDataExtractor.getMetaDataCount();
+            return mDataExtractor.size() + metadataCount;
         }
-        return 1;
+        return 1;// No Item screen
     }
 
     /***
-     * This method is relevant in case of difference type of items: item, playlist_header, footer
+     * This method is relevant in case of difference type of items: item, header, footer
      * @param position - the position in the list
      * @return the type.
      */
     @Override
     public int getItemViewType(int position) {
         //We return an item if results are null or if the position is within the bounds of the results
-        if (mDataExtractor == null || mDataExtractor.size() == 0) {
+        if (!hasElements()) {
             return DataExtractor.NO_ITEM;
         } else {
-            return mDataExtractor.GetItemType(position);
+            return mDataExtractor.getItemType(position);
         }
     }
 
@@ -101,25 +108,26 @@ public class ExtendedRecycleAdapter<T> extends RecyclerView.Adapter<ExtendedView
     @Override
     public ExtendedViewHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
         ExtendedViewHolder<T> viewHolder = mViewHolderGenerator.generate(this, parent, viewType);
-        if(viewType == DataExtractor.HEADER)
+        if(viewType == DataExtractor.HEADER) {
             mTouchCallback.setHeader(viewHolder);
-        if(viewType == DataExtractor.FOOTER)
+        }
+        if(viewType == DataExtractor.FOOTER) {
             mTouchCallback.setFooter(viewHolder);
+        }
         return viewHolder;
     }
 
 
     @Override
     public void onBindViewHolder(ExtendedViewHolder<T> holder, int position) {
-        if (mDataExtractor != null && mDataExtractor.size() != 0) {
-            mDataExtractor.bindViewHolder(holder, position);
+        if (hasElements()) {
+            holder.bind(mDataExtractor,position,mDataExtractor.getItemType(position));
             // if listener is define then make sure that when click, the data item is given to the listener.
-            if(mListener != null && getItemViewType(position) == DataExtractor.ITEM) {
-                final T item = mDataExtractor.get(mDataExtractor.hasHeader() ? position-1 : position);
+            if(mListener != null && mDataExtractor.isItem(position)) {
+                final T item = mDataExtractor.getAt(position);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Log.d("TTTT","CLICKED!!!");
                         mListener.onClick(view, item);
                     }
                 });
@@ -156,9 +164,10 @@ public class ExtendedRecycleAdapter<T> extends RecyclerView.Adapter<ExtendedView
     @NonNull
     @Override
     public String getSectionName(int position) {
-        return mDataExtractor.getSectionName(position);
+        String result =  mDataExtractor.getSectionName(position);
+        Log.d("Tgolomb",result);
+        return result;
     }
-
 
     public interface OnClickListener<T> {
         void onClick(View view,T item);

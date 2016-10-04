@@ -3,14 +3,17 @@ package com.libs.golomb.extendedrecyclerview.example.viewholder;
 import android.view.View;
 import android.widget.TextView;
 
+import com.libs.golomb.extendedrecyclerview.DataExtractor.DataExtractor;
 import com.libs.golomb.extendedrecyclerview.ExtendedRecycleAdapter;
-import com.libs.golomb.extendedrecyclerview.ExtendedViewHolder;
+import com.libs.golomb.extendedrecyclerview.example.SampleData;
+import com.libs.golomb.extendedrecyclerview.viewholder.ExtendedViewHolder;
 import com.libs.golomb.extendedrecyclerview.R;
 
 /**
  * Created by tomer on 02/10/2016.
+ * Example
  */
-public class StringFooterViewHolder extends ExtendedViewHolder<String> {
+public class StringFooterViewHolder extends ExtendedViewHolder<SampleData> {
 
     private final TextView mText;
 
@@ -35,7 +38,7 @@ public class StringFooterViewHolder extends ExtendedViewHolder<String> {
     }
 
     @Override
-    public void bind(String s, int i, int type) {
-        mText.setText(String.valueOf(s));
+    public void bind(DataExtractor<SampleData, ExtendedViewHolder<SampleData>> mDataExtractor, int position, int itemType) {
+        mText.setText("Footer of " + mDataExtractor.size() + " elements!");
     }
 }

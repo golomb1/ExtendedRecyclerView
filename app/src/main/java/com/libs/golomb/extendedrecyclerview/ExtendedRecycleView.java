@@ -8,6 +8,10 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.libs.golomb.extendedrecyclerview.Utils.DividerItemDecoration;
+import com.libs.golomb.extendedrecyclerview.Utils.ExtendedTouchCallback;
+import com.libs.golomb.extendedrecyclerview.Utils.ItemTouchHelperAdapter;
+import com.libs.golomb.extendedrecyclerview.example_app.FastScrollRecyclerView2;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.Arrays;
@@ -18,7 +22,7 @@ import java.util.List;
  * Created by golomb on 13/07/2016.
  * This class should represent a recycle view with customs option build in.
  */
-public class ExtendedRecycleView extends FastScrollRecyclerView {
+public class ExtendedRecycleView extends FastScrollRecyclerView2 {
 
     private Context mContext;
     private ItemTouchHelper mTouchHelper;
@@ -157,7 +161,7 @@ public class ExtendedRecycleView extends FastScrollRecyclerView {
         setLayoutManager(new LinearLayoutManager(mContext));
     }
 
-    public void initializeDefault(Context context,int orientation,ItemTouchHelperAdapter touchHelperAdapter,ExtendedRecycleAdapter adapter){
+    public void initializeDefault(Context context, int orientation, ItemTouchHelperAdapter touchHelperAdapter, ExtendedRecycleAdapter adapter){
         mContext = context;
         //enableDefaultDivider(orientation);
         enableDefaultAnimation();

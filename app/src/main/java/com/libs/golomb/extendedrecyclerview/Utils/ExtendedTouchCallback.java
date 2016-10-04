@@ -1,11 +1,11 @@
-package com.libs.golomb.extendedrecyclerview;
+package com.libs.golomb.extendedrecyclerview.Utils;
 
 import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
-import android.view.View;
+
+import com.libs.golomb.extendedrecyclerview.DataExtractor.DataExtractor;
+import com.libs.golomb.extendedrecyclerview.viewholder.ExtendedViewHolder;
 
 /**
  * This class represent a touch callback to create a drop and reorder effect to the list items
